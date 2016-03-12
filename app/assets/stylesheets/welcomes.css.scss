@@ -1,0 +1,54 @@
+// Place all the styles related to the welcomes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#login {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.tw_login{
+  width: 300px;
+  height: 50px;
+  color: white;
+  border: 1px #00BFFF  solid;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 13px;
+  background-color: #00BFFF;
+  a {
+  color: white;
+  }
+}
+
+.tw_login:hover{
+  background-color: #4169E1;
+}
+
+.tw:hover{
+  text-decoration: none;
+}
+
+.fb_login:hover{
+  background-color: #191970;
+}
+
+
+.fb_login {
+  width: 300px;
+  height: 50px;
+  color: white;
+  border: 1px #3B5998  solid;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 13px;
+  background-color: #3B5998;
+  a {
+  color: white;
+  }
+}
+
+.fb:hover{
+  text-decoration: none;
+}

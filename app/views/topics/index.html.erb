@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>2ちゃんねる</title>
+
+</head>
+<body>
+
+<div id="top">
+  <div class="contents">
+    <h1 class="top-title">2ちゃんねる</h1>
+
+<hr>
+
+    <!-- 検索フォーム -->
+    <div class="search-form">
+      <!-- <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+        <a style="cursor:pointer;"></a>
+      </div> -->
+      <a class="searchbtn">▼ 投稿数検索窓を非表示にする</a>
+        <div class="open">
+          <%= form_tag('/top', method: :get) do %>
+            <input type="text" name="word" placeholder="投稿数を検索" id="search"></input>
+            <input type="submit" value="検索"></input>
+          <% end %>
+          <% if @word.present? %>
+            <p>↓↓↓↓↓↓↓</p>
+            <p>【<%= @word %>&nbsp;&nbsp;&nbsp;<%= @find %>】</p>
+          <% end %>
+        </div>
+    </div>
+
+    <!-- 表示欄 -->
+<hr>
+    <div class="display">
+      <p>
+        <%= page_entries_info @topics %>
+      </p>
+
+      <br>
+
+      <p>
+        <% @topics.each_with_index do |topic, index| %>
+      </p>
+      <p class="id">
+        <%= topic.id %> : <%= topic.created_at %>
+        <a class="response" data-topic-id=<%= topic.id %>>返信する</a>/
+        <a class="edit" data-edit-id=<%= topic.id %>>編集する</a>
+        <hr style="border:none;border-top:dashed 1px;height:1px;margin-top:-8px;">
+      </p>
+      <p class="params">
+        <% if params[:aaa] %>
+              <img src="<%= params[:aaa][index] %>" />
+        <% else %>
+          <b><%= topic.body %></b>
+        <% end %>
+        <% topic.responses.each do |res| %>
+        <br>
+        <br>
+        >>
+        <%= res.res_content %>
+        <% end %>
+
+        <!-- 編集フォーム -->
+        <div class="edit-form" data-edit-form=<%= topic.id %>>
+          <%= form_tag('/edit', method: :post) do %>
+          <input type="hidden" name="id" value=<%= topic.id %>>
+          <textarea name="edit_content" rows="2" cols="100"><%= topic.body %></textarea>
+          <input type="submit" value="編集"></input>
+          <% end %>
+        </div>
+
+        <!-- 返信フォーム -->
+        <div class="res-form" data-topic-form=<%= topic.id %>>
+          <%= form_tag('/res', method: :post) do %>
+          <input type="hidden" name="topic_id" value=<%= topic.id %>>
+          <textarea name="res_content" rows="2" cols="100" placeholder="入力してください"></textarea>
+          <input type="submit" value="返信"></input>
+          <% end %>
+        </div>
+      </p>
+      <br>
+      <br>
+        <% end %>
+    </div>
+
+<hr>
+
+    <p><%= paginate @topics %></p>
+
+    <!-- 投稿フォーム -->
+    <div class="new-form">
+      <%= form_tag(new_path, method: :post) do %>
+        <div>
+          <textarea name="body" rows="15" cols="100"></textarea>
+        </div>
+        <% if @provider == "twitter" then %>
+        <div>
+          <input type="submit" value="投稿する（twitterにも投稿されます）">
+        </div>
+        <% else %>
+        <div>
+          <input type="submit" value="投稿する（facebookにも投稿されます）">
+        </div>
+      <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+      $(".open").show();
+      var flg = "close";
+      $(".searchbtn").click(function(){
+          $(".open").slideToggle();
+          if(flg == "close"){
+              $(this).text("▼ 投稿数検索窓を表示する");
+              flg = "open";
+          }else{
+              $(this).text("▼ 投稿数検索窓を非表示にする");
+              flg = "close";
+          }
+      });
+  });
+  $(document).ready(function(){
+      $(".res-form").hide();
+      var flg = "close";
+      $(".response").click(function(){
+          var topic_id = $(this).data("topic-id");
+          $("[data-topic-form=" + topic_id + "]").slideToggle();
+          if(flg == "close"){
+              $(this).text("返信フォームを閉じる");
+              flg = "res-form";
+          }else{
+              $(this).text("返信する");
+              flg = "close";
+          }
+      });
+  });
+  $(document).ready(function(){
+      $(".edit-form").hide();
+      var flg = "close";
+      $(".edit").click(function(){
+          var edit_id = $(this).data("edit-id");
+          $("[data-edit-form=" + edit_id + "]").slideToggle();
+          if(flg == "close"){
+              $(this).text("編集フォームを閉じる");
+              flg = "edit-form";
+          }else{
+              $(this).text("編集する");
+              flg = "close";
+          }
+      });
+  });
+</script>
+
+</body>
+</html>
