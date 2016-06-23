@@ -44,7 +44,7 @@ class TopicsController < ApplicationController
       redirect_to '/top'
     else
       auth = request.env["omniauth.auth"]
-      access_token = "CAACEdEose0cBAIugv1XZBLZC8tbvst2LGVaOpTZCDbTg4ZCTxuvQRB3zg9PxoTCpqMjZAKK5lFzZAReHX4hIFwYCurcFi3UjvLu0njg6iAgy6i6VtsZA4xCuDDeR2sPA5NChpzmHFnaul2BbBtf1iqZApxvwpa4563OKZA04MOMeyMrbOd7nnZB9ZAQWj4zzADrAPywbjZAJzR4ZC6mda14IXglEB"
+      access_token = "CAACEdEose0cBAMZBfevJ0vYqeg6ZC9RgGCCZATUHcUZAI4yDG7WpZAK7x3ZCf8dlnxrHofNX17RbV94ZAUz5pmeza9XFDSO8eAmGZC8n7d49utD63zJmZAt78azSSPzx2EeKZCnROTGn5d6aFZCQeUai6YJ0dKvQjZB2dNSDjKFGZAVWKAZB2TXeSlYE4cUeo8AF1lx8BcFwAyNX2MhggtbSZAztECi"
       graph = Koala::Facebook::API.new(access_token)
       graph.put_wall_post(status)
       redirect_to '/top'

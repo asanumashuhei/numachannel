@@ -1,3 +1,12 @@
+body {
+  background: linear-gradient(#F0F8FF, white);
+}
+
+.title {
+  text-decoration: none;
+  color: #000000;
+}
+
 .contents {
   margin: 0 auto;
   width: 700px;
@@ -13,4 +22,42 @@
 
 .response {
   text-align: right;
+}
+
+.id_cre {
+  float: left;
+}
+
+.res_edi {
+  text-align: right;
+}
+
+a {
+  cursor: pointer;
+}
+
+.goout:hover {
+  cursor: pointer;
+}
+
+.goout {
+ position: fixed;
+ bottom: 20px;
+ right: 20px;
+ width: 60px;
+  height: 38px;
+  background: #FFF;
+  border: 1px solid #2a82a3;
+  border-radius: 70px;
+  -moz-border-radius: 70px;
+  -webkit-border-radius: 70px;
+  color: #2a82a3;
+  padding: 42px 20px 20px;
+  display: block;
+  text-align: center;
+  padding-bottom: 90px;
+  font-weight: bold;
+  font-size: 0.3em;
+  transition: background-color 0.5s ease-in;
+  -webkit-transition: background-color 0.5s ease-in;
 }

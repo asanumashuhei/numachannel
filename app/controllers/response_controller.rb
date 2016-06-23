@@ -3,4 +3,8 @@ class ResponseController < ApplicationController
     respose = Response.create(res_content: params[:res_content], topic_id: params[:topic_id])
     redirect_to '/top'
   end
+
+
 end
+
+
